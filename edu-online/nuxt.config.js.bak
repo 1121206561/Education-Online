@@ -1,0 +1,49 @@
+module.exports = {
+  /*
+  ** Headers of the page
+  */
+  head: {
+    title: '����ѧԺ - Java��Ƶ|HTML5��Ƶ|ǰ����Ƶ|Python��Ƶ|��������Ƶ-��ѧ��1��+��н��IT������Ƶ�γ̣��ȷ���ͦ����ѧԱΪ���Ƽ�',
+    meta: [
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {
+        hid: 'description',
+        name: 'description',
+        content: '����ѧԺ�ǹ������ȵ�IT������Ƶѧϰƽ̨��ְҵ����ƽ̨����ֹĿǰ,����ѧԺ���ϡ�����ѧϰ�˴�������ƣ���ͬ�ϰٸ�֪�������Ŷ������ƶ���Java��HTML5ǰ�ˡ������ݡ�Python����Ƶ�γ̣������ѧϰ�߼�IT����ʦ��Ϊ��ҵ�����ʺ���ѧ����������󡢰�����ࡢʵս����ǿ��������ǰ�ص�ITϵ����Ƶ�γ̣�'
+      }
+    ],
+    link: [
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+    ]
+  },
+  /*
+  ** Customize the progress bar color
+  */
+  loading: {color: '#3B8070'},
+  /*
+  ** Build configuration
+  */
+  build: {
+    /*
+    ** Run ESLint on save
+    */
+    extend(config, {isDev, isClient}) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    }
+  },
+  plugins: [
+    {src: '~/plugins/nuxt-swiper-plugin.js', ssr: false}
+  ],
+  css: [
+    'swiper/dist/css/swiper.css'
+  ]
+}
+

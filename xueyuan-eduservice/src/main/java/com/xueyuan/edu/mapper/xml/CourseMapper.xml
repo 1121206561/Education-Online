@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xueyuan.edu.mapper.CourseMapper">
+    <select id="getAllCourseByAll" resultType="com.xueyuan.edu.entity.dto.CourseAllTermDTO">
+        SELECT
+		c.id,
+        c.title,
+        c.cover,
+		ecd.description,
+		c.lesson_num,
+		c.price,
+		s1.title AS subjectLevelOne,
+        s2.title AS subjectLevelTwo,
+        t.name AS teacherName
+    FROM
+        edu_course c
+        LEFT JOIN edu_teacher t ON c.teacher_id = t.id
+		LEFT JOIN edu_course_description ecd ON c.id = ecd.id
+        LEFT JOIN edu_subject s2 ON c.subject_id = s2.id
+		LEFT JOIN edu_subject s1 ON (SELECT parent_id FROM edu_subject s1 WHERE c.subject_id = s1.id) = s1.id
+    WHERE
+        c.id = #{couresId}
+     </select>
+
+    <select id="getCourseAll" resultType="com.xueyuan.edu.entity.vo.frontCourseVo">
+          SELECT
+		c.id,
+        c.title,
+        c.cover,
+		c.lesson_num,
+		c.price,
+		c.buy_count,
+		c.view_count,
+		ecd.description,
+		s1.title AS subjectLevelOne,
+        s2.title AS subjectLevelTwo,
+        t.name AS teacherName,
+        t.avatar,
+        t.intro
+    FROM
+        edu_course c
+        LEFT JOIN edu_teacher t ON c.teacher_id = t.id
+		LEFT JOIN edu_course_description ecd ON c.id = ecd.id
+        LEFT JOIN edu_subject s2 ON c.subject_id = s2.id
+		LEFT JOIN edu_subject s1 ON (SELECT parent_id FROM edu_subject s1 WHERE c.subject_id = s1.id) = s1.id
+    WHERE
+        c.id = #{id}
+    </select>
+</mapper>
